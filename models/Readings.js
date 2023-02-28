@@ -20,6 +20,11 @@ const readingSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    count: {
+      type: Number,
+      required: true,
+      default:1,
+    }
   },
   {
     timestamps: true,
