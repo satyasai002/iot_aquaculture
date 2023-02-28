@@ -45,7 +45,7 @@ exports.api_add_data = async (req, res) => {
         tds: req.body.tds,
         count: 1,
       });
-      reading
+      await reading
         .save()
         .then((result) => {
           res.status(201).json({ message: "Added Reading successfully" });
