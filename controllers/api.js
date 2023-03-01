@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Boat = require("../models/Boat");
 const Reading = require("../models/Readings")
 // const moment = require("moment")
-const moment = require("moment-timeZone");
+const moment = require("moment-timezone");
 
 exports.api_add_data = async (req, res) => {
     var now = new Date();
