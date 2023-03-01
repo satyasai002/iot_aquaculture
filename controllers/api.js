@@ -13,7 +13,7 @@ exports.api_add_data = async (req, res) => {
     const data = await Reading.findOne(
       {boatId:req.body.boatId , createdAt: { $gte: startOfToday }},{}
     );
-    console.log(data)
+    console.log(startOfToday)
     if(data!==null){
       const ncount = +data.count+1;
       const ntemp = String(+data.temp + (+req.body.temp - +data.temp)/ncount);
