@@ -51,7 +51,7 @@ exports.api_add_data = async (req, res) => {
         turbidity: req.body.turbidity,
         tds: req.body.tds,
         count: 1,
-        created: " Mar 1st 23",
+        created: moment().tz("Asia/Kolkata").format("MMM Do YY"),
       });
       await reading
         .save()
