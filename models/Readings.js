@@ -24,10 +24,11 @@ const readingSchema = new mongoose.Schema(
       type: Number,
       required: true,
       default:1,
+    },
+    created: {
+      type: String,
+      required: true,
     }
-  },
-  {
-    timestamps: true,
   }
 );
 

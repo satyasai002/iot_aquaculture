@@ -1,19 +1,21 @@
 const mongoose = require("mongoose");
 const Boat = require("../models/Boat");
 const Reading = require("../models/Readings")
+const moment = require("moment")
 
 exports.api_add_data = async (req, res) => {
     var now = new Date();
-    var startOfToday = new Date(
-      now.getFullYear(),
-      now.getMonth(),
-      now.getDate(),
-    );
+    // var startOfToday = new Date(
+    //   now.getFullYear(),
+    //   now.getMonth(),
+    //   now.getDate(),
+    // );
+    // console.log(moment().format("MMM Do YY"));
 
     const data = await Reading.findOne(
-      {boatId:req.body.boatId , createdAt: { $gte: startOfToday }},{}
+      { boatId: req.body.boatId, created: moment().format("MMM Do YY") },
+      {}
     );
-    console.log(startOfToday)
     if(data!==null){
       const ncount = +data.count+1;
       const ntemp = String(+data.temp + (+req.body.temp - +data.temp)/ncount);
@@ -29,7 +31,7 @@ exports.api_add_data = async (req, res) => {
       let doc = await Reading.findOneAndUpdate(
         {
           boatId: req.body.boatId,
-          createdAt: { $gte: startOfToday },
+          created: moment().format("MMM Do YY"),
         },
         nData,
         {
@@ -46,6 +48,7 @@ exports.api_add_data = async (req, res) => {
         turbidity: req.body.turbidity,
         tds: req.body.tds,
         count: 1,
+        created: moment().format("MMM Do YY"),
       });
       await reading
         .save()
