@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 const Boat = require("../models/Boat");
 const Reading = require("../models/Readings")
-const moment = require("moment")
+// const moment = require("moment")
+const moment = require("moment-timeZone");
 
 exports.api_add_data = async (req, res) => {
     var now = new Date();
@@ -11,9 +12,11 @@ exports.api_add_data = async (req, res) => {
     //   now.getDate(),
     // );
     // console.log(moment().format("MMM Do YY"));
+    var moment = require("moment-timezone");
+    console.log(moment().tz("Asia/Kolkata").format("MMM Do YY"));
 
     const data = await Reading.findOne(
-      { boatId: req.body.boatId, created: moment().format("MMM Do YY") },
+      { boatId: req.body.boatId, created:  moment().tz("Asia/Kolkata").format("MMM Do YY") },
       {}
     );
     if(data!==null){
@@ -31,7 +34,7 @@ exports.api_add_data = async (req, res) => {
       let doc = await Reading.findOneAndUpdate(
         {
           boatId: req.body.boatId,
-          created: moment().format("MMM Do YY"),
+          created:  moment().tz("Asia/Kolkata").format("MMM Do YY"),
         },
         nData,
         {
@@ -48,7 +51,7 @@ exports.api_add_data = async (req, res) => {
         turbidity: req.body.turbidity,
         tds: req.body.tds,
         count: 1,
-        created: moment().format("MMM Do YY"),
+        created: " Mar 1st 23",
       });
       await reading
         .save()
