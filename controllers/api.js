@@ -10,8 +10,8 @@ exports.api_add_data = async (req, res) => {
       now.getDate(),
     );
 
-    const data =await Reading.findOne({boatId:req.boatId},
-      { createdAt: { $gte: startOfToday } }
+    const data = await Reading.findOne(
+      { createdAt: { $gte: startOfToday }, boatId: req.boatId }
     );
     console.log(data)
     if(data){
@@ -27,8 +27,7 @@ exports.api_add_data = async (req, res) => {
         count: ncount,
       };
       let doc = await Reading.findOneAndUpdate(
-        { boatId: req.boatId },
-        { createdAt: { $gte: startOfToday } },
+        { createdAt: { $gte: startOfToday }, boatId: req.boatId },
         nData,
         {
           new: true,
