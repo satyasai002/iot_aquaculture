@@ -14,7 +14,7 @@ exports.api_add_data = async (req, res) => {
       {boatId:req.body.boatId , createdAt: { $gte: startOfToday }},{}
     );
     console.log(data)
-    if(data){
+    if(data!==null){
       const ncount = +data.count+1;
       const ntemp = String(+data.temp + (+req.body.temp - +data.temp)/ncount);
       const nturbidity =
@@ -36,7 +36,6 @@ exports.api_add_data = async (req, res) => {
           new: true,
         }
       );
-      console.log(nData);
       res.status(201).json(doc);
     }
     else{
