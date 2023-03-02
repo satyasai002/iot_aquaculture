@@ -133,6 +133,7 @@ exports.user_getAll_data = async (req, res) => {
   try {
     const data = await Reading.find(
       { boatId: req.body.boatId },{},{ sort: { createdAt: -1 } }).limit(7);
+      console.log(data);
     res.status(200).json(data);
   } catch (err) {
     console.log(err);
