@@ -47,7 +47,7 @@ exports.user_signup = (req, res) => {
     });
 };
 
-exports.user_login = (req, res) => {
+exports.user_login = async(req, res) => {
   User.find({ email: req.body.email })
     .then((user) => {
       if (user.length < 1) {
@@ -77,6 +77,11 @@ exports.user_login = (req, res) => {
           return res.status(200).json({
             message: "Auth successful",
             token: token,
+            name:user[0].name,
+            id:user[0]._id,
+            mobile:user[0].mobile,
+            email:user[0].email,
+            boatId:user[0].boatIds,
           });
         }
         res.status(403).json({
