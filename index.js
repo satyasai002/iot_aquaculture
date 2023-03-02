@@ -51,14 +51,11 @@ io.on("connection", (socket) => {
   //take userId and socketId from user
   socket.on("addUser", (userId, boatId) => {
     addUser(userId, boatId, socket.id);
-    console.log("added user");
   });
 
   //send and get message
   socket.on("sendData", ({ boatId, Data }) => {
     const users1 = getUser(boatId);
-    console.log("a data is been sent");
-    console.log(users1);
     users1.map((user) => {
       io.to(user.socketId).emit("getData", Data);
     });
@@ -66,9 +63,7 @@ io.on("connection", (socket) => {
 
   //when disconnect
   socket.on("disconnect", () => {
-    console.log("a user disconnected!");
     removeUser(socket.id);
-    io.emit("getUsers", users);
   });
 });
 
