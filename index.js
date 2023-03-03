@@ -47,6 +47,7 @@ const getUser = (boatId) => {
 
 io.on("connection", (socket) => {
   //when ceonnect
+  console.log("user Connected")
 
   //take userId and socketId from user
   socket.on("addUser", (userId, boatId) => {
@@ -54,10 +55,20 @@ io.on("connection", (socket) => {
   });
 
   //send and get message
-  socket.on("sendData", ({ boatId, Data }) => {
+  socket.on("sendData", ({ boatId},{Temp},{Tds},{Turb}) => {
+    console.log("user send data")
+
+    console.log(boatId)
+    
+    const Data = {
+      temp: Temp,
+      tds: Tds,
+      turbidity : Turb,
+    }
+    console.log(Data);
     const users1 = getUser(boatId);
     users1.map((user) => {
-      io.to(user.socketId).emit("getData", Data);
+      io.to(user.socketId).emit("getData",Data);
     });
   });
 
