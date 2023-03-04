@@ -116,6 +116,7 @@ exports.user_profile = async (req, res) => {
 };
 
 exports.user_get_data = async (req, res) => {
+  console.log(req.body.boatId);
     try{
     Reading.findOne({boatId:req.body.boatId},{},{ sort: { createdAt: -1 } }, function (err, data) {
       res.status(200).json(data);
