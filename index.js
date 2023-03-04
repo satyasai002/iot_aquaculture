@@ -33,6 +33,9 @@ const io = new Server(server, {
 
 let users = [];
 let boats = [];
+app.set('io',io);
+app.set('users',users);
+
 
 const addUser = (userId, boatId, socketId) => {
   !users.some((user) => user.userId === userId) &&
@@ -44,33 +47,31 @@ const removeUser = (socketId) => {
 const getUser = (boatId) => {
   return users.filter((user) => user.boatId === boatId);
 };
-
+app.set("getUser", getUser);
 io.on("connection", (socket) => {
   //when ceonnect
   console.log("user Connected")
 
   //take userId and socketId from user
-  socket.on("addUser", (userId, boatId) => {
-    addUser(userId, boatId, socket.id);
+  socket.on("addUser", (Id) => {
+    addUser(Id.userId, Id.boatId, socket.id);
   });
 
   //send and get message
-  socket.on("sendData", ({ boatId},{Temp},{Tds},{Turb}) => {
-    console.log("user send data")
-
-    console.log(boatId)
+  // socket.on("sendData", ({ boatId},{Temp},{Tds},{Turb}) => {
+  //   console.log("user send data")
+  //   console.log(Temp)
     
-    const Data = {
-      temp: Temp,
-      tds: Tds,
-      turbidity : Turb,
-    }
-    console.log(Data);
-    const users1 = getUser(boatId);
-    users1.map((user) => {
-      io.to(user.socketId).emit("getData",Data);
-    });
-  });
+  //   const Data = {
+  //     temp: Temp,
+  //     tds: Tds,
+  //     turbidity : Turb,
+  //   }
+  //   const users1 = getUser(boatId);
+  //   users1.map((user) => {
+  //     io.to(user.socketId).emit("getData",Data);
+  //   });
+  // });
 
   //when disconnect
   socket.on("disconnect", () => {
@@ -79,7 +80,7 @@ io.on("connection", (socket) => {
 });
 
 const PORT = process.env.PORT || 4000;
-
+console.log(PORT)
 server.listen(PORT, () => {
   console.log(`Server started on PORT : ${PORT}`);
 });

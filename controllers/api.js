@@ -5,6 +5,18 @@ const Reading = require("../models/Readings")
 const moment = require("moment-timezone");
 
 exports.api_add_data = async (req, res) => {
+    const {boatId,temp,tds,turbidity} = req.body;
+    const Data = {
+      Temp:temp,
+      Tds:tds,
+      Turb:turbidity,
+    }
+    // req.app.get("io").emit("senddata", boatId);
+    // console.log(req.app.get('users'))
+    const users1 = req.app.get("getUser")(boatId);
+    users1.map((user) => {
+      req.app.get("io").to(user.socketId).emit("getData", Data);
+    });
     var now = new Date();
     // var startOfToday = new Date(
     //   now.getFullYear(),
