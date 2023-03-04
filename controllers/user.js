@@ -132,7 +132,7 @@ exports.user_get_data = async (req, res) => {
 exports.user_getAll_data = async (req, res) => {
   try {
     const data = await Reading.find(
-      { boatId: req.body.boatId },{},{ sort: { createdAt: -1 } }).limit(7);
+      { boatId: req.body.boatId },{}).limit(6);
       console.log(data);
     res.status(200).json(data);
   } catch (err) {
