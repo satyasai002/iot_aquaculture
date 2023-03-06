@@ -69,10 +69,7 @@ exports.user_login = async(req, res) => {
               email: user[0].email,
               userId: user[0]._id,
             },
-            "password",
-            {
-              expiresIn: "12h",
-            }
+            "password"
           );
           return res.status(200).json({
             message: "Auth successful",
