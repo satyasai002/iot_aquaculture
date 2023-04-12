@@ -17,7 +17,7 @@ exports.api_add_data = async (req, res) => {
   const mailgun = new Mailgun(formData);
   const mg = mailgun.client({
     username: "api",
-    key: "d2cb23842767724e401639d95bad2bb3-2cc48b29-ae2a22b2",
+    key: "key-9919ca836f8b94979733c24924fc02b6",
   });
   if(temp==108){
 
