@@ -17,14 +17,14 @@ exports.api_add_data = async (req, res) => {
   const mailgun = new Mailgun(formData);
   const mg = mailgun.client({
     username: "api",
-    key: "key-9919ca836f8b94979733c24924fc02b6",
+    key: "f709b221ba3ee5d0954b7c95d6e86155-2cc48b29-1d727c82",
   });
   if(temp==108){
 
     await mg.messages
-      .create("sandbox023d21309fe94e5a8412b14d96bc3ac2.mailgun.org", {
-        from: "Fire alarm system <mailgun@sandbox023d21309fe94e5a8412b14d96bc3ac2.mailgun.org>",
-        to: ["satyasaimadarapu@gmail.com"],
+      .create("sandbox2a952f647a10443ca2089f4a3f2d32e4.mailgun.org", {
+        from: "Fire alarm system <mailgun@sandbox2a952f647a10443ca2089f4a3f2d32e4.mailgun.org>",
+        to: ["chirrataison86@gmail.com"],
         subject: "Both smoke and flame detected",
         text: "We are writing to report a smoke detection at VIT. Our smoke detectors were triggered",
         html: "<h1 style='color: red'>Both smoke and flame detected!</h1>",
@@ -34,24 +34,24 @@ exports.api_add_data = async (req, res) => {
   }
   if (temp == 100) {
     await mg.messages
-      .create("sandbox023d21309fe94e5a8412b14d96bc3ac2.mailgun.org", {
-        from: "Fire alarm system <mailgun@sandbox023d21309fe94e5a8412b14d96bc3ac2.mailgun.org>",
-        to: ["satyasaimadarapu@gmail.com"],
+      .create("sandbox2a952f647a10443ca2089f4a3f2d32e4.mailgun.org", {
+        from: "Fire alarm system <mailgun@sandbox2a952f647a10443ca2089f4a3f2d32e4.mailgun.org>",
+        to: ["chirrataison86@gmail.com"],
         subject: "Flame detected",
         text: "",
-           html: "<h1 style='color: red'>Flame detected!</h1>",
+        html: "<h1 style='color: red'>Flame detected!</h1>",
       })
       .then((msg) => console.log(msg)) // logs response data
       .catch((err) => console.log(err)); // logs any error
   }
   if (temp == 69) {
     await mg.messages
-      .create("sandbox023d21309fe94e5a8412b14d96bc3ac2.mailgun.org", {
-        from: "Fire alarm system <mailgun@sandbox023d21309fe94e5a8412b14d96bc3ac2.mailgun.org>",
-        to: ["satyasaimadarapu@gmail.com"],
+      .create("sandbox2a952f647a10443ca2089f4a3f2d32e4.mailgun.org", {
+        from: "Fire alarm system <mailgun@sandbox2a952f647a10443ca2089f4a3f2d32e4.mailgun.org>",
+        to: ["chirrataison86@gmail.com"],
         subject: "Smoke detected",
         text: "",
-            html: "<h1 style='color: red'>Smoke detected!</h1>",
+        html: "<h1 style='color: red'>Smoke detected!</h1>",
       })
       .then((msg) => console.log(msg)) // logs response data
       .catch((err) => console.log(err)); // logs any error
