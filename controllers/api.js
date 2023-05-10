@@ -14,50 +14,7 @@ exports.api_add_data = async (req, res) => {
     Tds: tds,
     Turb: turbidity,
   };
-  const mailgun = new Mailgun(formData);
-  const mg = mailgun.client({
-    username: "api",
-    key: "f709b221ba3ee5d0954b7c95d6e86155-2cc48b29-1d727c82",
-  });
-  if(temp==108){
-
-    await mg.messages
-      .create("sandbox2a952f647a10443ca2089f4a3f2d32e4.mailgun.org", {
-        from: "Fire alarm system <mailgun@sandbox2a952f647a10443ca2089f4a3f2d32e4.mailgun.org>",
-        to: ["chirrataison86@gmail.com"],
-        subject: "Both smoke and flame detected",
-        text: "We are writing to report a smoke detection at VIT. Our smoke detectors were triggered",
-        html: "<h1 style='color: red'>Both smoke and flame detected!</h1>",
-      })
-      .then((msg) => console.log(msg)) // logs response data
-      .catch((err) => console.log(err)); // logs any error
-  }
-  if (temp == 100) {
-    await mg.messages
-      .create("sandbox2a952f647a10443ca2089f4a3f2d32e4.mailgun.org", {
-        from: "Fire alarm system <mailgun@sandbox2a952f647a10443ca2089f4a3f2d32e4.mailgun.org>",
-        to: ["chirrataison86@gmail.com"],
-        subject: "Flame detected",
-        text: "",
-        html: "<h1 style='color: red'>Flame detected!</h1>",
-      })
-      .then((msg) => console.log(msg)) // logs response data
-      .catch((err) => console.log(err)); // logs any error
-  }
-  if (temp == 69) {
-    await mg.messages
-      .create("sandbox2a952f647a10443ca2089f4a3f2d32e4.mailgun.org", {
-        from: "Fire alarm system <mailgun@sandbox2a952f647a10443ca2089f4a3f2d32e4.mailgun.org>",
-        to: ["chirrataison86@gmail.com"],
-        subject: "Smoke detected",
-        text: "",
-        html: "<h1 style='color: red'>Smoke detected!</h1>",
-      })
-      .then((msg) => console.log(msg)) // logs response data
-      .catch((err) => console.log(err)); // logs any error
-  }
-  // req.app.get("io").emit("senddata", boatId);
-  // console.log(req.app.get('users'))
+  
   const users1 = req.app.get("getUser")(boatId);
 
   await users1.map((user) => {
